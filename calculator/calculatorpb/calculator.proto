@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option go_package = "calculator/calculatorpb";
+package calculator;
+
+message SumRequest {
+    int32 first_number = 1;
+    int32 second_number = 2;
+}
+message SumResponse {
+    int32 result = 1;
+}
+
+message MultipleRequest {
+    int32 first_number =1;
+    int32 second_number = 2;
+}
+
+message MultipleResponse {
+    int32 multiple_result = 1;  
+}
+message ShapeManyTimesRequest {
+    int32 radius = 1;
+}
+
+message ShapeManyTimesResponse {
+    int32 result = 1;  
+}
+
+message ComputedAvrageRequest {
+    int32 number = 1;
+}
+
+message ComputedAvrageResponse {
+    double result = 1;
+}
+
+message FindMaxNumEveryoneRequest {
+    repeated int32 number = 1;
+}
+
+message FindMaxNumEveryoneResponse {
+    double result = 1;
+}
+
+service CalculatorService {
+    rpc Sum (SumRequest) returns (SumResponse);
+    rpc Multiple (MultipleRequest) returns (MultipleResponse);
+    rpc ShapeManyTimes (ShapeManyTimesRequest) returns (stream ShapeManyTimesResponse);
+    rpc ComputedAvrage (stream ComputedAvrageRequest) returns (ComputedAvrageResponse);
+    rpc FindMaxNumEveryone (stream FindMaxNumEveryoneRequest) returns (stream FindMaxNumEveryoneResponse);
+}

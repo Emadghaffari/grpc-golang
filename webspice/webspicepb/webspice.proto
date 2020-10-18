@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package webspice;
+option go_package = "webspice/webspicepb";
+
+
+message WebspiceRequest {
+    string first_name = 1;
+    int32 age = 2;
+}
+
+message WebspiceResponse {
+    string result = 1;
+}
+
+message WebspiceManyRequest {
+    string first_name = 1;
+    int32 age = 2;
+}
+
+message WebspiceManyResponse {
+    string result = 1;
+}
+
+message WebspiceLongRequest {
+    string first_name = 1;
+    int32 age = 2;
+}
+
+message WebspiceLongResponse {
+    string result = 1;
+}
+
+message WebspiceEveryDomainRequest {
+    string domain = 1;
+}
+
+message WebspiceEveryDomainResponse {
+    repeated string result = 1;
+}
+
+message User {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone = 4;
+    string created_at = 5;
+    repeated string permissions = 6;
+    enum Status {
+        DEACTIVE = 0;
+        ACTIVE = 1;
+    }
+    Status status = 7;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+message CreateUserResponse {
+    User user = 1;
+}
+
+
+message UpdateUserRequest {
+    User user = 1;
+}
+message UpdateUserResponse {
+    User user = 1;
+}
+
+
+message DeleteUserRequest {
+    User user = 1;
+}
+message DeleteUserResponse {
+    User user = 1;
+}
+
+
+message SearchUserRequest {
+    User user = 1;
+}
+message SearchUserResponse {
+    User user = 1;
+}
+
+message SearchUserManyRequest {
+    User user = 1;
+}
+message SearchUserManyResponse {
+    User user = 1;
+}
+message SearchEveryUserRequest {
+    User user = 1;
+}
+message SearchEveryUserResponse {
+    User user = 1;
+}
+
+
+service Webspice {
+    rpc Webspice (WebspiceRequest) returns (WebspiceResponse);
+
+    rpc WebspiceMany (WebspiceManyRequest) returns (stream WebspiceManyResponse);
+
+    rpc WebspiceLong (stream WebspiceLongRequest) returns (WebspiceLongResponse);
+
+    rpc WebspiceEveryDomain (stream WebspiceEveryDomainRequest) returns (stream WebspiceEveryDomainResponse);
+
+    // users CROD
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc SearchUser (SearchUserRequest) returns (SearchUserResponse);
+
+    // stream get all Users
+    rpc SearchUserMany (SearchUserManyRequest) returns (stream SearchUserManyResponse);
+
+    // EveryStream
+    rpc SearchEveryUser (stream SearchEveryUserRequest) returns (stream SearchEveryUserResponse);
+}

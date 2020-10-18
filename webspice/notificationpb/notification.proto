@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package webspice;
+option go_package = "webspice/notificationpb";
+
+message Notification {
+    string id = 1;
+    string phone = 2;
+    string code = 3;
+    string created_at = 5;
+    string deprecated_at = 6;
+    string for = 7;
+    enum Status {
+        DEACTIVE = 0;
+        ACTIVE = 1;
+    }
+    Status status = 8;
+}
+
+message CreateNotificationRequest {
+    Notification notification = 1;
+}
+message CreateNotificationResponse {
+    Notification notification = 1;
+}
+
+
+message UpdateNotificationRequest {
+    Notification notification = 1;
+}
+message UpdateNotificationResponse {
+    Notification notification = 1;
+}
+
+
+
+service Webspice {
+
+    // Notifications CU
+    rpc CreateNotification (CreateNotificationRequest) returns (CreateNotificationResponse);
+    rpc UpdateNotification (UpdateNotificationRequest) returns (UpdateNotificationResponse);
+}
